@@ -13,3 +13,5 @@ Instalar o plugin 'Docker'
 
 #### 4. Jenkins File:
 Criar um arquivo Jenkinsfile na raiz do projeto do Git para descrição da pipeline a partir do SCM
+
+Fonte: https://www.jenkins.io/doc/tutorials/build-a-java-app-with-maven/
