@@ -18,6 +18,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh 'mvn test'
+                sh 'mvn sonar:sonar -Dsonar.projectKey=java-design-pattern -Dsonar.host.url=http://localhost:9000 -Dsonar.login=6dacca13092a77af7dbfff57ca9cdd72bae4b2f0'
             }
             post {
                 always {

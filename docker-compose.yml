@@ -5,34 +5,17 @@ services:
     ports:
       - 9000:9000
     networks:
-      - mynetwork
+      - jenkins
     volumes:
       - sonarqube_data:/opt/sonarqube/data
       - sonarqube_extensions:/opt/sonarqube/extensions
       - sonarqube_logs:/opt/sonarqube/logs
-    depends_on:
-      - jenkins
-
-
-  jenkins:
-    container_name: jenkins
-    image: jenkins/jenkins:lts-jdk11
-    ports:
-      - 8080:8080
-      - 50000:50000
-    networks:
-      - mynetwork
-    volumes:
-      - jenkins_home:/var/jenkins_home 
-
 networks:
-  mynetwork:
+  jenkins:
     external: true
     driver: bridge
 
 volumes:
-  jenkins_home:
-    external: true
   sonarqube_data:
      external: true
   sonarqube_extensions:
