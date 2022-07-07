@@ -18,7 +18,7 @@ pipeline {
             steps {
                 sh 'mvn test'
                 withSonarQubeEnv('sonarqube') {
-                    sh 'mvn sonar:sonar -Dsonar.projectKey=java-design-pattern -Dsonar.host.url=http://localhost:9000 -Dsonar.login=cbd731cb3523e683a02c23819b2f388175830346'
+                    sh 'mvn sonar:sonar -Dsonar.projectKey=java-design-pattern -Dsonar.host.url=http://192.168.0.17:9000 -Dsonar.login=cbd731cb3523e683a02c23819b2f388175830346'
                 }
             }
             post {
