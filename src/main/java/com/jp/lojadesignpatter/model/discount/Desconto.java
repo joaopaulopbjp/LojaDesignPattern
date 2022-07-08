@@ -12,7 +12,7 @@ public abstract class Desconto {
 	
 	
 	
-	public Desconto(Desconto next) {
+	protected Desconto(Desconto next) {
 		this.next = next;
 	}
 
