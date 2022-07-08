@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import com.jp.lojadesignpatter.exception.SituacaoException;
 import com.jp.lojadesignpatter.model.budget.Orcamento;
-import com.jp.lojadesignpatter.model.budget.status.OrcamentoFinalizado;
+import com.jp.lojadesignpatter.model.budget.status.OrcamentoAprovado;
 import com.jp.lojadesignpatter.model.budget.status.SituacaoOrcamento;
 
 
@@ -19,7 +19,7 @@ class TestaSituacaoOrcamento {
 	
 	@BeforeEach
 	public void configuraTeste() {
-		this.situacao = new OrcamentoFinalizado();
+		this.situacao = new OrcamentoAprovado();
 		this.orcam = new Orcamento(new BigDecimal("1000").setScale(2),1);
 	}
 
@@ -28,7 +28,9 @@ class TestaSituacaoOrcamento {
 		try {
 			this.situacao.finalizar(this.orcam);	
 		} catch (SituacaoException e) {
-			assertEquals("Orcamento não pode ser finalizado.", e.getMessage());
+			fail();
 		}
+		
+		assertEquals(new BigDecimal("1000").setScale(2),this.orcam.calculaDescontoExtra());
 	}
 }
