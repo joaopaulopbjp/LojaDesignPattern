@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.jp.lojadesignpatter.model.budget.Orcamento;
+import com.jp.lojadesignpatter.model.discount.CalculadoraDeDesconto;
 import com.jp.lojadesignpatter.model.discount.Desconto;
 import com.jp.lojadesignpatter.model.discount.DescontoQuantidadeItensMaiorQueCinco;
 import com.jp.lojadesignpatter.model.discount.DescontoValorMaiorQueQuinhentos;
@@ -15,57 +16,20 @@ import com.jp.lojadesignpatter.model.discount.SemDesconto;
 
 class TestaCalculadoraDeDescontos {
 	private Orcamento orcamento;
+	private CalculadoraDeDesconto calcDesc;
 	
 	@BeforeEach
 	public void configuraTeste() {
 		this.orcamento = new Orcamento(new BigDecimal("1000").setScale(2),1);
+		calcDesc = new CalculadoraDeDesconto();
 	}
 
 	@Test
-	void calculaDescontoValorMaiorQueQuinhentos() {
+	void calculaCalculadoraDescontoComDescontoValorMaiorQueQuinhentos() {
 		
 		Desconto descontoValorMaiorQuinhentos = new DescontoValorMaiorQueQuinhentos(new SemDesconto());
 		
-		assertEquals(new BigDecimal("100").setScale(2), descontoValorMaiorQuinhentos.calculaDesconto(orcamento).setScale(2));
-	}
-	
-	@Test
-	void calculaDescontoQuantidadeItensMaiorQueCinco() {
-		
-		Desconto descontoQtItensMaior = new DescontoQuantidadeItensMaiorQueCinco(new SemDesconto());
-		
-		assertEquals(new BigDecimal("5").setScale(2), descontoQtItensMaior.calculaDesconto(
-				new Orcamento(new BigDecimal("100").setScale(2),6)
-				).setScale(2));
-	}
-	
-	
-	@Test
-	void calculaDescontoEncadeadoQuantidadeItensMaiorQueCincoEValorMaiorQueQuinhentos() {
-		
-		Desconto descontoEncadeado = new DescontoQuantidadeItensMaiorQueCinco(
-				new DescontoValorMaiorQueQuinhentos(
-						new SemDesconto()
-						) 
-				);
-		
-		assertEquals(new BigDecimal("150").setScale(2), descontoEncadeado.calculaDesconto(
-				new Orcamento(new BigDecimal("1000").setScale(2),6)
-				).setScale(2));
-	}
-	
-	@Test
-	void calculaDescontoEncadeadoValorMaiorQueQuinhentosEQuantidadeItensMaiorQueCinco() {
-		
-		Desconto descontoEncadeado = new DescontoValorMaiorQueQuinhentos(
-				new DescontoQuantidadeItensMaiorQueCinco(
-						new SemDesconto()
-						) 
-				);
-		
-		assertEquals(new BigDecimal("150").setScale(2), descontoEncadeado.calculaDesconto(
-				new Orcamento(new BigDecimal("1000").setScale(2),6)
-				).setScale(2));
+		assertEquals(new BigDecimal("100").setScale(2), this.calcDesc.calculaDesconto(this.orcamento, descontoValorMaiorQuinhentos));
 	}
 
 }
