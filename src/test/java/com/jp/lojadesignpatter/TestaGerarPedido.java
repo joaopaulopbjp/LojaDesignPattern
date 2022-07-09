@@ -39,7 +39,7 @@ class TestaGerarPedido {
 		ServicePedido emailService = new EmailServicePedido();
 		this.comandoGerarPedido = new GerarPedido(this.pedido, Arrays.asList(emailService) );
 		this.comandoGerarPedido.execute();
-		assertEquals(1,emailService.getPedidosProcessados());
+		assertEquals(1,emailService.getPedidosProcessados().size());
 	}
 
 	@Test
