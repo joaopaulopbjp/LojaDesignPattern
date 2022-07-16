@@ -2,7 +2,15 @@ package com.jp.lojadesignpatter.model.tax;
 
 import java.math.BigDecimal;
 
-public class ImpostoICMS implements Imposto {
+public class ImpostoICMS extends Imposto {
+
+	public ImpostoICMS(Imposto impostoDecorator) {
+		super(impostoDecorator);
+	}
+	
+	public ImpostoICMS() {
+		super(null);
+	}
 
 	@Override
 	public BigDecimal calcularImposto(BigDecimal valorOrcamento) {

@@ -24,14 +24,22 @@ class TestaCalculadoraDeImpostos {
 	void calculaImpostoICMSSobreOrcamento() {
 		Imposto impostoICMS = new ImpostoICMS();
 		
-		assertEquals(new BigDecimal("10").setScale(2), impostoICMS.calcularImposto(orcamento.getValor()));
+		assertEquals(new BigDecimal("10").setScale(2), impostoICMS.calcularImpostoComposto(orcamento.getValor()));
 	}
 	
 	@Test
 	void calculaImpostoISSSobreOrcamento() {		
 		Imposto impostoISS = new ImpostoISS();
 		
-		assertEquals(new BigDecimal("1.5").setScale(2), impostoISS.calcularImposto(orcamento.getValor()));
+		assertEquals(new BigDecimal("1.5").setScale(2), impostoISS.calcularImpostoComposto(orcamento.getValor()));
+	}
+	
+	@Test
+	void calculaImpostoISSCompostoComICMSSobreOrcamento() {	
+		Imposto impostoICMS = new ImpostoICMS();
+		Imposto impostoISSComICMS = new ImpostoISS(impostoICMS);
+		
+		assertEquals(new BigDecimal("11.5").setScale(2), impostoISSComICMS.calcularImpostoComposto(orcamento.getValor()));
 	}
 
 }
